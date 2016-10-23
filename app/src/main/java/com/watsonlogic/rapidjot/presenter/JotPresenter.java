@@ -1,8 +1,6 @@
 package com.watsonlogic.rapidjot.presenter;
 
-import com.watsonlogic.rapidjot.PresenterOpsExposedToModel;
-import com.watsonlogic.rapidjot.PresenterOpsExposedToView;
-import com.watsonlogic.rapidjot.ViewOpsExposedToPresenter;
+import com.watsonlogic.rapidjot.view.ViewOpsExposedToPresenter;
 import com.watsonlogic.rapidjot.model.Jot;
 
 import java.lang.ref.WeakReference;

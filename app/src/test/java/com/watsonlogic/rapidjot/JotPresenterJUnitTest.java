@@ -29,7 +29,7 @@ public class JotPresenterJUnitTest {
     }
 
     @Test
-    public void createJot() {
+    public void createJot() throws InterruptedException {
         assertThat(presenter.getJots(), notNullValue());
         assertThat(presenter.getJots().isEmpty(), is(true));
 
@@ -37,6 +37,8 @@ public class JotPresenterJUnitTest {
         presenter.createJot(now);
         assertTrue(presenter.getJots().containsKey(now.getTime()));
         assertThat(presenter.getJots().size(), is(1));
+
+        Thread.sleep(1);
 
         now = new Date();
         presenter.createJot(now);

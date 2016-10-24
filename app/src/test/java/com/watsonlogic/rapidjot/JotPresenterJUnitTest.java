@@ -1,6 +1,7 @@
 package com.watsonlogic.rapidjot;
 
 import com.watsonlogic.rapidjot.presenter.JotPresenter;
+import com.watsonlogic.rapidjot.view.ViewOpsExposedToPresenter;
 
 import org.junit.Before;
 import org.junit.Test;

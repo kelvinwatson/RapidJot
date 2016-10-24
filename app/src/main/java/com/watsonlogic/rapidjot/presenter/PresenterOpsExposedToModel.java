@@ -1,4 +1,4 @@
-package com.watsonlogic.rapidjot;
+package com.watsonlogic.rapidjot.presenter;
 
 /**
  * @author: Kelvin Watson

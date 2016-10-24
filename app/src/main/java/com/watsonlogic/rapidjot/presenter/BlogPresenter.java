@@ -1,6 +1,6 @@
 package com.watsonlogic.rapidjot.presenter;
 
-import com.watsonlogic.rapidjot.ViewOpsExposedToPresenter;
+import com.watsonlogic.rapidjot.view.ViewOpsExposedToPresenter;
 
 /**
  * @author: Kelvin Watson

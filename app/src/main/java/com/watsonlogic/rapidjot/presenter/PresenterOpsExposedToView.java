@@ -1,4 +1,4 @@
-package com.watsonlogic.rapidjot;
+package com.watsonlogic.rapidjot.presenter;
 
 import com.watsonlogic.rapidjot.model.Jot;
 

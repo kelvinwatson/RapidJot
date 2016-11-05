@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.watsonlogic.rapidjot.R;
-import com.google.android.gms.plus.PlusOneButton;
 
 /**
  * A fragment with a Google +1 button.
@@ -31,7 +30,6 @@ public class JotEditorFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private PlusOneButton mPlusOneButton;
 
     private OnFragmentInteractionListener mListener;
 
@@ -75,7 +73,7 @@ public class JotEditorFragment extends Fragment {
         }
     }
 
-    public void onBackPressed(){
+    public void onBackPressed() {
         getActivity().getSupportFragmentManager().popBackStack();
     }
 

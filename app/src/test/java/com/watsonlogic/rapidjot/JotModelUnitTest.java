@@ -1,24 +1,19 @@
 package com.watsonlogic.rapidjot;
 
 import com.watsonlogic.rapidjot.model.Jot;
-import com.watsonlogic.rapidjot.presenter.JotPresenter;
 
-import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import java.util.Date;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
 
 /**
  * @author: Kelvin Watson
  */
 
-public class JotModelTest {
+public class JotModelUnitTest {
 
     @Test
     public void getId(){

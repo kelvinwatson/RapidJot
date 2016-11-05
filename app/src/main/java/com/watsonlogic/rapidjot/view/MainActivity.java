@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-        if (currentFragment instanceof JotEditorFragment){
+        if (currentFragment instanceof JotEditorFragment) {
             ((JotEditorFragment) currentFragment).onBackPressed();
         }
     }

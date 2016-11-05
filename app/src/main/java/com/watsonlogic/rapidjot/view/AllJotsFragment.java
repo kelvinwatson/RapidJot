@@ -27,7 +27,7 @@ import java.util.Date;
  * Use the {@link AllJotsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AllJotsFragment extends Fragment implements ViewOpsExposedToPresenter  {
+public class AllJotsFragment extends Fragment implements ViewOpsExposedToPresenter {
 
     private PresenterOpsExposedToView presenter = new JotPresenter(this);
 
@@ -113,6 +113,7 @@ public class AllJotsFragment extends Fragment implements ViewOpsExposedToPresent
         super.onDetach();
         mListener = null;
     }
+
     @Override
     public void notifyJotCreated(Jot currentJot) {
         launchJotEditor(currentJot);
@@ -137,8 +138,8 @@ public class AllJotsFragment extends Fragment implements ViewOpsExposedToPresent
     protected void displayJot(Jot jot) {
         ViewGroup parent = (ViewGroup) getView().findViewById(R.id.content_main);
         View jotCard = getActivity().getLayoutInflater().inflate(R.layout.jot_display_card, parent, false);
-        ((TextView)jotCard.findViewById(R.id.preview_title)).setText(jot.getTitle());
-        ((TextView)jotCard.findViewById(R.id.preview_content)).setText(jot.getPlainTextContent());
+        ((TextView) jotCard.findViewById(R.id.preview_title)).setText(jot.getTitle());
+        ((TextView) jotCard.findViewById(R.id.preview_content)).setText(jot.getPlainTextContent());
         parent.addView(jotCard);
     }
 

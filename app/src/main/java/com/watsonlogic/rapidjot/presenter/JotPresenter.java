@@ -1,8 +1,8 @@
 package com.watsonlogic.rapidjot.presenter;
 
+import com.watsonlogic.rapidjot.model.Jot;
 import com.watsonlogic.rapidjot.model.JotModel;
 import com.watsonlogic.rapidjot.view.ViewOpsExposedToPresenter;
-import com.watsonlogic.rapidjot.model.Jot;
 
 import java.lang.ref.WeakReference;
 import java.util.Date;
@@ -55,11 +55,11 @@ public class JotPresenter implements PresenterOpsExposedToView, PresenterOpsExpo
         notifyViewJotUpdated(currentJot);
     }
 
-    private void notifyViewJotUpdated(Jot jot){
+    private void notifyViewJotUpdated(Jot jot) {
         view.get().notifyJotUpdated(jot);
     }
 
-    private void notifyViewJotCreated(Jot jot){
+    private void notifyViewJotCreated(Jot jot) {
         view.get().notifyJotCreated(jot);
     }
 
@@ -78,7 +78,6 @@ public class JotPresenter implements PresenterOpsExposedToView, PresenterOpsExpo
     }
 
     /**
-     *
      * @param id
      */
     @Override
@@ -98,7 +97,7 @@ public class JotPresenter implements PresenterOpsExposedToView, PresenterOpsExpo
     }
 
     @Override
-    public Jot getJot(Date id){
+    public Jot getJot(Date id) {
         return model.getJot(id);
     }
 }

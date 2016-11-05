@@ -1,10 +1,9 @@
 package com.watsonlogic.rapidjot.view;
 
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,24 +11,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import com.watsonlogic.rapidjot.model.Jot;
-import com.watsonlogic.rapidjot.presenter.PresenterOpsExposedToView;
 import com.watsonlogic.rapidjot.R;
-import com.watsonlogic.rapidjot.presenter.JotPresenter;
-
-import java.util.Date;
 
 /**
  * @author: Kelvin Watson
  */
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ViewOpsExposedToPresenter {
-
-    private PresenterOpsExposedToView presenter = new JotPresenter(this);
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, AllJotsFragment.OnFragmentInteractionListener, JotEditorFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +26,15 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.add_jot_fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                presenter.createJot(new Date());
+        if (findViewById(R.id.fragment_container) != null) {
+            if (savedInstanceState != null) {
+                return;
             }
-        });
+
+            AllJotsFragment allJotsFrag = new AllJotsFragment();
+            allJotsFrag.setArguments(getIntent().getExtras());
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, allJotsFrag).commit();
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -63,6 +53,11 @@ public class MainActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+        }
+
+        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        if (currentFragment instanceof JotEditorFragment){
+            ((JotEditorFragment) currentFragment).onBackPressed();
         }
     }
 
@@ -114,14 +109,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void notifyJotInserted(Jot currentJot) {
-        displayJot(currentJot);
+    public void onFragmentInteraction(Uri uri) {
+
     }
 
-    protected void displayJot(Jot jot) {
-        ViewGroup parent = (ViewGroup) findViewById(R.id.content_main);
-        View card = getLayoutInflater().inflate(R.layout.jot_card, parent, true);
-        ((TextView)card.findViewById(R.id.title)).setText(jot.getTitle());
-        ((TextView)card.findViewById(R.id.plain_text_content)).setText(jot.getPlainTextContent());
-    }
+
 }

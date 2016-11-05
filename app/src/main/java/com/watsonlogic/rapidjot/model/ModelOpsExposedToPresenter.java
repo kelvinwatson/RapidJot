@@ -4,23 +4,33 @@ import java.util.Date;
 import java.util.Map;
 
 /**
- * Created by Bryce on 10/23/2016.
+ * @author: Kelvin Watson
  */
 public interface ModelOpsExposedToPresenter {
     /**
      * Get list of jots from database
+     *
      * @return a List of {@link Jot}s
      */
     Map<Long, Jot> fetchJots();
 
     /**
-     * Store a {@link Jot} in  database
+     * Insert a new {@link Jot} in the database
+     *
      * @param {@link Jot}
      */
-    void storeJot(Jot jot);
+    void createJot(Jot jot);
+
+    /**
+     * Update an existing {@link Jot} in the database
+     *
+     * @param {@link Jot}
+     */
+    void updateJot(Jot jot);
 
     /**
      * Retrieve one {@link Jot} from the database
+     *
      * @param id
      * @return a {@link Jot}
      */

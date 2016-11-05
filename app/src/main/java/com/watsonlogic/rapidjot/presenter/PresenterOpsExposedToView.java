@@ -17,10 +17,12 @@ public interface PresenterOpsExposedToView {
     void setCurrentJot(Date id);
 
     /**
-     * Get the current jot based on the id
-     * @return Jot
+     * Calls the model to fetch a {@link Jot} from the service with the corresponding id
+     * @return {@link Jot}
      */
-    Jot getCurrentJot(Date id);
+    Jot getCurrentJot();
+
+    Jot getJot(Date id);
 
     /**
      * Creates a new jot based on the unique date

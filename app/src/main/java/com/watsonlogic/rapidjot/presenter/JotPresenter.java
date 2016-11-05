@@ -21,7 +21,7 @@ public class JotPresenter implements PresenterOpsExposedToView, PresenterOpsExpo
 
     public JotPresenter(ViewOpsExposedToPresenter view) {
         this.view = new WeakReference<>(view);
-        this.model = new JotModel();
+        this.model = new JotModel(this);
         jots = model.fetchJots(); //retrieve user's jots from service
     }
 
@@ -29,7 +29,48 @@ public class JotPresenter implements PresenterOpsExposedToView, PresenterOpsExpo
     public void createJot(Date id) {
         currentJot = new Jot(id);
         jots.put(id.getTime(), currentJot); //store jot locally
-        model.storeJot(currentJot);         //store jot in database
+        model.createJot(currentJot);         //store jot in database
+        notifyViewJotCreated(currentJot);
+    }
+
+    /**
+     * Stores a plain text jot for now. Support for rich text is planned for the future.
+     *
+     * @param title
+     * @param plainTextContent
+     */
+    public void updateCurrentJot(String title, String plainTextContent) {
+        if (currentJot != null) {
+            currentJot.setTitle(title);
+            currentJot.setPlainTextContent(plainTextContent);
+            jots.put(currentJot.getId().getTime(), currentJot);
+        } else {
+            Date date = new Date();
+            currentJot = new Jot(date, title, plainTextContent);
+            jots.put(date.getTime(), currentJot);
+        }
+
+        model.updateJot(currentJot);
+
+        notifyViewJotUpdated(currentJot);
+    }
+
+    private void notifyViewJotUpdated(Jot jot){
+        view.get().notifyJotUpdated(jot);
+    }
+
+    private void notifyViewJotCreated(Jot jot){
+        view.get().notifyJotCreated(jot);
+    }
+
+    @Override
+    public void notifyJotCreated(Jot jot) {
+        view.get().notifyJotCreated(jot);
+    }
+
+    @Override
+    public void notifyJotUpdated(Jot jot) {
+        view.get().notifyJotUpdated(jot);
     }
 
     public Map<Long, Jot> getJots() {
@@ -51,43 +92,13 @@ public class JotPresenter implements PresenterOpsExposedToView, PresenterOpsExpo
         }
     }
 
-    /**
-     * Returns a {@link Jot} from the service with the corresponding id
-     * @param id
-     * @return
-     */
     @Override
-    public Jot getCurrentJot(Date id) {
-        return model.getJot(id);
-    }
-
     public Jot getCurrentJot() {
         return currentJot;
     }
 
-    /**
-     * Stores a plain text jot for now. Support for rich text is planned for the future.
-     *
-     * @param title
-     * @param plainTextContent
-     */
-    public void updateCurrentJot(String title, String plainTextContent) {
-        if (currentJot != null) {
-            currentJot.setTitle(title);
-            currentJot.setPlainTextContent(plainTextContent);
-            jots.put(currentJot.getId().getTime(), currentJot);
-        } else {
-            Date date = new Date();
-            currentJot = new Jot(date, title, plainTextContent);
-            jots.put(date.getTime(), currentJot);
-        }
-
-        model.storeJot(currentJot);
-
-        notifyView();
-    }
-
-    private void notifyView(){
-        view.get().notifyJotInserted(currentJot);
+    @Override
+    public Jot getJot(Date id){
+        return model.getJot(id);
     }
 }

@@ -8,7 +8,16 @@ import com.watsonlogic.rapidjot.model.Jot;
 public interface ViewOpsExposedToPresenter {
 
     /**
-     * Notify the view that the jot has been inserted into the database
+     * Called when creating a {@link Jot}
+     *
+     * @param {@link Jot} jot
      */
-    void notifyJotInserted(Jot currentJot);
+    void notifyJotCreated(Jot jot);
+
+    /**
+     * Called when updating a {@link Jot}
+     *
+     * @param {@link Jot} jot
+     */
+    void notifyJotUpdated(Jot jot);
 }

@@ -6,6 +6,7 @@ import android.view.View;
 import com.watsonlogic.rapidjot.model.Jot;
 import com.watsonlogic.rapidjot.model.JotModel;
 import com.watsonlogic.rapidjot.presenter.JotPresenter;
+import com.watsonlogic.rapidjot.view.AllJotsFragment;
 import com.watsonlogic.rapidjot.view.MainActivity;
 import com.watsonlogic.rapidjot.view.ViewOpsExposedToPresenter;
 
@@ -93,7 +94,7 @@ public class JotPresenterJUnitTest {
 
     @Test
     public void updateCurrentJot(){
-        MainActivity view = Mockito.mock(MainActivity.class);
+        AllJotsFragment view = Mockito.mock(AllJotsFragment.class);
         JotPresenter presenter = new JotPresenter(view);
         Date id = new Date();
         presenter.createJot(id);

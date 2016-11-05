@@ -1,5 +1,6 @@
 package com.watsonlogic.rapidjot.presenter;
 
+import com.watsonlogic.rapidjot.model.JotModel;
 import com.watsonlogic.rapidjot.view.ViewOpsExposedToPresenter;
 import com.watsonlogic.rapidjot.model.Jot;
 
@@ -14,25 +15,21 @@ import java.util.Map;
 public class JotPresenter implements PresenterOpsExposedToView, PresenterOpsExposedToModel {
 
     private WeakReference<ViewOpsExposedToPresenter> view;
-    private Jot currentJot;
+    private JotModel model;
+    protected Jot currentJot;
     private Map<Long, Jot> jots = new LinkedHashMap<>(); //the Long is the Date in milliseconds
 
     public JotPresenter(ViewOpsExposedToPresenter view) {
         this.view = new WeakReference<>(view);
-        loadJots(); //retrieve user's jots from service
+        this.model = new JotModel();
+        jots = model.fetchJots(); //retrieve user's jots from service
     }
 
     @Override
     public void createJot(Date id) {
         currentJot = new Jot(id);
-        jots.put(id.getTime(), currentJot); //insert the jot so that it can be retrieved later
-        //todo: call service to store this new jot
-    }
-
-    @Override
-    public Map<Long, Jot> loadJots() {
-        //todo: create and execute async task to get jots
-        return new LinkedHashMap<>();
+        jots.put(id.getTime(), currentJot); //store jot locally
+        model.storeJot(currentJot);         //store jot in database
     }
 
     public Map<Long, Jot> getJots() {
@@ -55,13 +52,13 @@ public class JotPresenter implements PresenterOpsExposedToView, PresenterOpsExpo
     }
 
     /**
-     * Returns a jot from the service with the corresonding id
+     * Returns a {@link Jot} from the service with the corresponding id
      * @param id
      * @return
      */
     @Override
     public Jot getCurrentJot(Date id) {
-        return null;
+        return model.getJot(id);
     }
 
     public Jot getCurrentJot() {
@@ -74,22 +71,23 @@ public class JotPresenter implements PresenterOpsExposedToView, PresenterOpsExpo
      * @param title
      * @param plainTextContent
      */
-    public void saveCurrentJot(Date id, String title, String plainTextContent) {
-        //todo: retrieve jot from map
+    public void updateCurrentJot(String title, String plainTextContent) {
         if (currentJot != null) {
             currentJot.setTitle(title);
             currentJot.setPlainTextContent(plainTextContent);
+            jots.put(currentJot.getId().getTime(), currentJot);
         } else {
-            currentJot = new Jot(id, title, plainTextContent);
+            Date date = new Date();
+            currentJot = new Jot(date, title, plainTextContent);
+            jots.put(date.getTime(), currentJot);
         }
 
-        //todo: make API call to store Jot object
-        jots.put(id.getTime(), currentJot);
+        model.storeJot(currentJot);
 
         notifyView();
     }
 
     private void notifyView(){
-        view.get().notifyJotInserted();
+        view.get().notifyJotInserted(currentJot);
     }
 }

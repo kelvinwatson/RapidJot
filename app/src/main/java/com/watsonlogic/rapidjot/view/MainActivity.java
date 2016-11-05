@@ -2,6 +2,7 @@ package com.watsonlogic.rapidjot.view;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -11,7 +12,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.watsonlogic.rapidjot.model.Jot;
 import com.watsonlogic.rapidjot.presenter.PresenterOpsExposedToView;
 import com.watsonlogic.rapidjot.R;
 import com.watsonlogic.rapidjot.presenter.JotPresenter;
@@ -109,7 +114,14 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void notifyJotInserted() {
+    public void notifyJotInserted(Jot currentJot) {
+        displayJot(currentJot);
+    }
 
+    protected void displayJot(Jot jot) {
+        ViewGroup parent = (ViewGroup) findViewById(R.id.content_main);
+        View card = getLayoutInflater().inflate(R.layout.jot_card, parent, true);
+        ((TextView)card.findViewById(R.id.title)).setText(jot.getTitle());
+        ((TextView)card.findViewById(R.id.plain_text_content)).setText(jot.getPlainTextContent());
     }
 }

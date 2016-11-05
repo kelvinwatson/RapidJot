@@ -23,11 +23,6 @@ public interface PresenterOpsExposedToView {
     Jot getCurrentJot(Date id);
 
     /**
-     * Get the list of user jots
-     */
-    Map<Long, Jot> loadJots();
-
-    /**
      * Creates a new jot based on the unique date
      * @param id
      */

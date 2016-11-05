@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
+import com.watsonlogic.rapidjot.model.Jot;
 import com.watsonlogic.rapidjot.view.MainActivity;
 
 import org.junit.After;
@@ -16,9 +17,13 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ActivityController;
 
+import java.util.Date;
+
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Robolectric Unit Test for MainActivity, which will execute on the development machine (host JVM).
@@ -55,7 +60,6 @@ public class MainActivityRobolectricUnitTest {
 
     @Test
     public void verifyViews() throws Exception {
-        activity = Robolectric.setupActivity(MainActivity.class);
         View tv1 = activity.findViewById(R.id.tv1);
         assertThat(tv1, is(notNullValue()));
         assertThat(((TextView) activity.findViewById(R.id.tv1)).getText().toString(), is("Hello World!"));
@@ -65,5 +69,15 @@ public class MainActivityRobolectricUnitTest {
         Intent intent = new Intent(RuntimeEnvironment.application, MainActivity.class);
         intent.putExtra("activity_extra", extra);
         activity = controller.withIntent(intent).create().start().resume().visible().get();
+    }
+
+    @Test
+    public void verifyJotCardAdded(){
+        Jot jot = mock(Jot.class);
+        when(jot.getTitle()).thenReturn("mTitle");
+        when(jot.getPlainTextContent()).thenReturn("mContent");
+        activity.notifyJotInserted(jot);
+        assertThat(((TextView) activity.findViewById(R.id.title)).getText().toString(), is("mTitle"));
+        assertThat(((TextView) activity.findViewById(R.id.plain_text_content)).getText().toString(), is("mContent"));
     }
 }

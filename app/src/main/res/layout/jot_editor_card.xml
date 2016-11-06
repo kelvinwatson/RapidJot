@@ -5,8 +5,7 @@
     android:layout_marginBottom="@dimen/activity_vertical_margin">
 
     <RelativeLayout
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
+        android:padding="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

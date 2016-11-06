@@ -30,7 +30,7 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
         <TextView
-            android:id="@+id/preview_content"
+            android:id="@+id/preview_plain_text_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -44,8 +44,9 @@
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/preview_content"
+            android:layout_below="@id/preview_title"
             android:gravity="left|center_vertical"
+            android:layout_marginTop="16dp"
             android:paddingLeft="8dp"
             android:text="Edit" />
     </RelativeLayout>

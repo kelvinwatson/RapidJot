@@ -9,25 +9,34 @@ import java.util.Date;
  */
 public class Jot {
 
-    private Date id; //each jot is uniquely identified by the date & time of creation
+    private Long id; //each jot is uniquely identified by the date & time of creation (Date to Long)
     private String title;
     private String plainTextContent;
 
+    public Jot()
+    {
+
+    }
+
     public Jot(Date id) {
-        this.id = id;
+        this.id = id.getTime();
     }
 
     public Jot(Date inception, String title, String plainTextContent) {
-        this.id = inception;
+        this.id = inception.getTime();
         this.title = title;
         this.plainTextContent = plainTextContent;
     }
 
-    public Date getId() {
+    public Long getId() {
         return id;
     }
 
     public void setId(Date id) {
+        this.id = id.getTime();
+    }
+
+    public void setId(Long id) {
         this.id = id;
     }
 

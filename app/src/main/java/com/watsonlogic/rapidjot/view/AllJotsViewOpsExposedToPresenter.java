@@ -5,15 +5,7 @@ import com.watsonlogic.rapidjot.model.Jot;
 /**
  * @author: Kelvin Watson
  */
-public interface ViewOpsExposedToPresenter {
-
-    /**
-     * Called when creating a {@link Jot}
-     *
-     * @param {@link Jot} jot
-     */
-    void notifyJotCreated(Jot jot);
-
+public interface AllJotsViewOpsExposedToPresenter {
     /**
      * Called when updating a {@link Jot}
      *

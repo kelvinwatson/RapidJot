@@ -19,14 +19,14 @@ public class JotModelUnitTest {
     public void getId(){
         Date jotId = new Date();
         Jot currentJot = new Jot(jotId);
-        assertThat(currentJot.getId(), is(jotId));
+        assertThat(currentJot.getId(), is(jotId.getTime()));
     }
 
     @Test
     public void getTitle(){
         Date jotId = new Date();
         Jot currentJot = new Jot(jotId);
-        assertThat(currentJot.getId(), is(jotId));
+        assertThat(currentJot.getId(), is(jotId.getTime()));
         currentJot.setTitle("some title");
         assertThat(currentJot.getTitle(), is("some title"));
     }
@@ -35,7 +35,7 @@ public class JotModelUnitTest {
     public void getPlainText(){
         Date jotId = new Date();
         Jot currentJot = new Jot(jotId);
-        assertThat(currentJot.getId(), is(jotId));
+        assertThat(currentJot.getId(), is(jotId.getTime()));
         currentJot.setPlainTextContent("some plain text content");
         assertThat(currentJot.getPlainTextContent(), is("some plain text content"));
     }

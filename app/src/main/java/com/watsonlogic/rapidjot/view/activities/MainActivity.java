@@ -1,6 +1,5 @@
-package com.watsonlogic.rapidjot.view;
+package com.watsonlogic.rapidjot.view.activities;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -13,11 +12,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.watsonlogic.rapidjot.R;
+import com.watsonlogic.rapidjot.view.fragments.AllJotsFragment;
+import com.watsonlogic.rapidjot.view.fragments.JotEditorFragment;
 
 /**
  * @author: Kelvin Watson
  */
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, AllJotsFragment.OnFragmentInteractionListener, JotEditorFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,11 +108,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
-
-
 }

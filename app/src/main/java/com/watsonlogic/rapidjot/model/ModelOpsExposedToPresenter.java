@@ -1,18 +1,24 @@
 package com.watsonlogic.rapidjot.model;
 
-import java.util.Date;
-import java.util.Map;
+import java.util.List;
 
 /**
  * @author: Kelvin Watson
  */
 public interface ModelOpsExposedToPresenter {
     /**
-     * Get list of jots from database
+     * Get list of {@Link Jot}s from database
      *
      * @return a List of {@link Jot}s
      */
-    Map<Long, Jot> fetchJots();
+    List<Jot> fetchJots();
+
+    /**
+     * Get local copy of list of {@Link Jot}s
+     *
+     * @return a List of {@link Jot}s
+     */
+    List<Jot> getJots();
 
     /**
      * Insert a new {@link Jot} in the database
@@ -24,15 +30,24 @@ public interface ModelOpsExposedToPresenter {
     /**
      * Update an existing {@link Jot} in the database
      *
-     * @param {@link Jot}
+     * @param jotUnderEdit {@link Jot}
+     * @param title
+     * @param plainTextContent
      */
-    void updateJot(Jot jot);
+    void updateJot(Jot jotUnderEdit, String title, String plainTextContent);
 
     /**
-     * Retrieve one {@link Jot} from the database
+     * Retrieve one {@link Jot} from the list of Jots
      *
-     * @param id
+     * @param position
      * @return a {@link Jot}
      */
-    Jot getJot(Date id);
+    Jot getJot(int position);
+
+    /**
+     * Return the number of {@link Jot}s from the list of Jots
+     *
+     * @return
+     */
+    int getJotCount();
 }

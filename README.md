@@ -16,5 +16,8 @@ Unit tests are written using JUnit, Mockito and Robolectric. Automated UI integr
 ### Continuous Integration
 Travis CI is used to ensure that the build and tests pass with each merge.
 
+### Google Awareness API
+Google's Awareness API will be used to add location/weather data to blog posts.
+
 ## License
 Apache License v2.0

@@ -16,15 +16,13 @@ import android.widget.TextView;
 import com.watsonlogic.rapidjot.R;
 import com.watsonlogic.rapidjot.model.Jot;
 import com.watsonlogic.rapidjot.model.JotModel;
-import com.watsonlogic.rapidjot.model.ModelOpsExposedToPresenter;
 import com.watsonlogic.rapidjot.presenter.AllJotsPresenter;
 import com.watsonlogic.rapidjot.presenter.AllJotsPresenterOpsExposedToView;
-import com.watsonlogic.rapidjot.presenter.JotEditorPresenter;
-import com.watsonlogic.rapidjot.presenter.JotEditorPresenterOpsExposedToView;
 import com.watsonlogic.rapidjot.view.AllJotsViewOpsExposedToPresenter;
-import com.watsonlogic.rapidjot.view.JotEditorViewOpsExposedToPresenter;
 
 import java.util.Date;
+
+import static android.support.v4.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE;
 
 /**
  * @author: Kelvin Watson
@@ -91,6 +89,7 @@ public class AllJotsFragment extends Fragment implements AllJotsViewOpsExposedTo
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, JotEditorFragment.newInstance(args), EDITOR_FRAGMENT);
         transaction.addToBackStack(EDITOR_FRAGMENT);
+        transaction.setTransition(TRANSIT_FRAGMENT_FADE);
         transaction.commit();
     }
 

@@ -12,11 +12,6 @@ import com.watsonlogic.rapidjot.R;
  * @author: Kelvin Watson
  */
 public class JotEditorFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
     public JotEditorFragment() {
         // Required empty public constructor
     }
@@ -27,7 +22,6 @@ public class JotEditorFragment extends Fragment {
      * @param args {@link Bundle}.
      * @return A new instance of fragment JotEditorFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static JotEditorFragment newInstance(Bundle args) {
         JotEditorFragment fragment = new JotEditorFragment();
         fragment.setArguments(args);
